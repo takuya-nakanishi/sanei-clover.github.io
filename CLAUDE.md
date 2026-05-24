@@ -33,6 +33,12 @@ description={ご相談内容 / MESSSAGE 欄の値}
 # ローカル動作確認
 - ポートは 8080 を使う事
 
+# Git 運用ルール
+- 特段の指示がない限り、変更作業は `feature/{適切な名前}` ブランチで実施する
+  - ブランチ名は Claude Code が変更内容から適切な kebab-case で命名する（例: `feature/mod-services-content`, `feature/clean-dead-code`）
+  - 既存ブランチ命名規則（`mod-` / `add-` / `clean-` などの動詞接頭辞）に揃える
+- コミット後は origin にpushし、main へのPRを作成する
+
 # Google Analytics 4
 - 測定ID: G-R362SW6WBR
 - 設置対象: 全ページ (index.html / 404.html / privacy.html / profiles/*)
