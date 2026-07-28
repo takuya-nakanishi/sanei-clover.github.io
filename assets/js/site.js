@@ -70,8 +70,9 @@
       const full = ($("#cf-name").value || "").trim();
       const parts = full.split(/[\s　]+/).filter(Boolean);
       if (parts.length >= 2) {
-        $("#cf-first-name").value = parts[0];
-        $("#cf-last-name").value = parts.slice(1).join(" ");
+        // 日本語の「姓 名」順: 1つ目が姓 (last_name)、2つ目以降が名 (first_name)
+        $("#cf-last-name").value = parts[0];
+        $("#cf-first-name").value = parts.slice(1).join(" ");
       } else {
         // スペースが無い場合は last_name（Salesforce必須項目）へまとめて格納
         $("#cf-first-name").value = "";
