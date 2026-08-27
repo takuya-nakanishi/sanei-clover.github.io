@@ -244,17 +244,15 @@
         </header>
         <div class="contact">
           <form id="contact-form" class="form reveal" data-stagger="1"
-                action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DdL00000wN69l"
-                method="POST" target="sf-webtolead">
+                action="https://web-to-notion-cloudflare.sanei-clover.workers.dev/"
+                method="POST">
             <span class="form__tag">Contact Form</span>
-            <!-- Salesforce Web-to-Lead 固定値・隠しフィールド -->
-            <input type="hidden" name="oid" value="00DdL00000wN69l">
-            <input type="hidden" name="lead_source" value="Web問合せ">
-            <input type="hidden" id="cf-first-name" name="first_name">
-            <input type="hidden" id="cf-last-name" name="last_name">
+            <!-- 自動投稿よけ。人には見えない位置に置き、入力があれば送信を無視する -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+                   style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
             <div class="field"><label for="cf-company">会社名 / Company</label><input id="cf-company" type="text" name="company" placeholder="株式会社サンエイクローバー" required></div>
             <div class="form-row">
-              <div class="field"><label for="cf-name">氏名 / Name</label><input id="cf-name" type="text" placeholder="山田 太郎" required></div>
+              <div class="field"><label for="cf-name">氏名 / Name</label><input id="cf-name" type="text" name="name" placeholder="山田 太郎" required></div>
               <div class="field"><label for="cf-phone">電話 / Phone</label><input id="cf-phone" type="tel" name="phone" placeholder="03-0000-0000" required></div>
             </div>
             <div class="field"><label for="cf-email">メール / Email</label><input id="cf-email" type="email" name="email" placeholder="you@example.com" required></div>
@@ -262,7 +260,6 @@
             <button type="submit" class="submit"><span class="submit-label">送信する / Send</span></button>
             <p id="contact-status" role="status" style="font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--coral);min-height:1em"></p>
           </form>
-          <iframe name="sf-webtolead" title="送信先" aria-hidden="true" tabindex="-1" style="display:none"></iframe>
         </div>
       </div>
     </section>
