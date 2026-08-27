@@ -50,50 +50,56 @@
   // Year stamp
   $$("[data-year]").forEach((el) => (el.textContent = String(new Date().getFullYear())));
 
-  // Contact form → Salesforce Web-to-Lead（非表示iframe経由でページ遷移なし送信）
+  // Contact form → Cloudflare Worker 経由で Notion へ登録
+  //
+  // 以前はSalesforce Web-to-Leadへ非表示iframe経由で投げていたが、
+  // iframeのloadイベントは「何かが読み込まれた」ことしか示さず、
+  // 送信が成功したのか失敗したのかを区別できなかった。
+  // fetchならレスポンスで実際の可否が分かるため、嘘の完了メッセージを出さずに済む。
   const form = $("#contact-form");
   if (form) {
     const status = $("#contact-status");
     const submit = form.querySelector("button[type=submit]");
     const label = submit?.querySelector(".submit-label");
-    const frame = document.querySelector('iframe[name="sf-webtolead"]');
     let submitting = false;
 
-    form.addEventListener("submit", (e) => {
-      // 必須項目チェック（未入力なら送信せずブラウザ標準UIで通知）
+    const setStatus = (text) => { if (status) status.textContent = text; };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (submitting) return;
+
+      // 必須項目チェック（未入力ならブラウザ標準UIで通知）
       if (!form.checkValidity()) {
-        e.preventDefault();
         form.reportValidity();
         return;
       }
-      // 氏名（1欄）を姓・名に分割し、Web-to-Lead の first_name / last_name へ
-      const full = ($("#cf-name").value || "").trim();
-      const parts = full.split(/[\s　]+/).filter(Boolean);
-      if (parts.length >= 2) {
-        // 日本語の「姓 名」順: 1つ目が姓 (last_name)、2つ目以降が名 (first_name)
-        $("#cf-last-name").value = parts[0];
-        $("#cf-first-name").value = parts.slice(1).join(" ");
-      } else {
-        // スペースが無い場合は last_name（Salesforce必須項目）へまとめて格納
-        $("#cf-first-name").value = "";
-        $("#cf-last-name").value = parts[0] || "";
-      }
-      // ページ遷移はさせず、target の iframe へそのまま送信
+
       submitting = true;
       submit.disabled = true;
       if (label) { label.dataset.orig = label.textContent; label.textContent = "送信中…"; }
-      if (status) { status.style.color = "var(--coral)"; status.textContent = ""; }
-    });
+      setStatus("");
 
-    if (frame) {
-      frame.addEventListener("load", () => {
-        if (!submitting) return; // 初期ロード（about:blank）は無視
-        submitting = false;
-        if (status) status.textContent = "お問い合わせありがとうございます。担当よりご連絡いたします。";
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          throw new Error(data.error || `送信に失敗しました (${res.status})`);
+        }
+        setStatus("お問い合わせありがとうございます。担当よりご連絡いたします。");
         form.reset();
+      } catch (err) {
+        // 失敗を黙って飲み込まない。電話という代替手段を必ず案内する
+        setStatus(`送信できませんでした（${err.message}）。お手数ですが 03-6876-4989 までご連絡ください。`);
+      } finally {
+        submitting = false;
         submit.disabled = false;
         if (label && label.dataset.orig) label.textContent = label.dataset.orig;
-      });
-    }
+      }
+    });
   }
 })();

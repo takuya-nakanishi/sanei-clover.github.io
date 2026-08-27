@@ -18,17 +18,36 @@
 - 私のプロフィール (profiles/takuya-nakanishi/index.html)
 
 ## Web問合せフォーム
+
+送信先は自前のCloudflare Worker(`sc-products/apps/web-to-notion-cloudflare`)。
+Workerが受けてNotionの「プロスペクト」DBへ登録し、Slackへ通知する。
+**2026-08-27にSalesforce Web-to-Leadから移行した**(Salesforceを開く習慣がなく
+問い合わせに気づけなかったため。受け皿だったDeveloper Edition組織は180日
+ログインが無いと消える点も理由)。
+
 ### POST先:
-https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DdL00000wN69l
+https://web-to-notion-cloudflare.sanei-clover.workers.dev/
 
 ### フォームパラメータ
-oid="00DdL00000wN69l" (固定値)
-lead_source="Web問合せ" (固定値)
-phone={電話 / PHONE 欄の値}
-first_name={氏名 / NAME 欄の名前値 (スペースで分割した2つ目以降すべての値)}
-last_name={氏名 / NAME 欄の苗字値 (スペースで分割した1つ目の値)}
-email={メール / EMAIL欄の値}
-description={ご相談内容 / MESSSAGE 欄の値}
+- `company` = 会社名 / Company 欄
+- `name` = 氏名 / Name 欄(**姓名の分割は不要**。Worker側が1欄のまま扱う)
+- `phone` = 電話 / Phone 欄
+- `email` = メール / Email 欄
+- `description` = ご相談内容 / Message 欄
+- `_gotcha` = 自動投稿よけの隠しフィールド。**人には見せない**。値が入っていると
+  Workerが送信を無視する(botに失敗を悟らせないため200を返す)
+
+Worker側はname属性の揺れを候補表で吸収するため、上記以外の名前でも大抵通る。
+候補に無いフィールドも捨てられず、Notionページの本文へ「その他の入力」として残る。
+
+### 送信方式
+`fetch()` でJSONレスポンス(`{"ok":true}`)を受け取り、成功/失敗を判定する。
+以前の非表示iframe方式は、iframeのloadイベントが「何かが読み込まれた」ことしか
+示さず**送信の成否を区別できなかった**ため廃止した。
+失敗時は電話番号を添えて案内する(黙って飲み込まない)。
+
+Workerは `ALLOWED_ORIGINS` でこのサイトのオリジンだけを受け付ける。
+ローカル確認は `http://localhost:8080` も許可済み。
 
 # ローカル動作確認
 - ポートは 8080 を使う事
