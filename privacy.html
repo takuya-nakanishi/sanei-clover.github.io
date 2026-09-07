@@ -8,6 +8,7 @@
   {% include google-analytics.html %}
   <title>プライバシーポリシー | 株式会社サンエイクローバー</title>
   <meta name="description" content="株式会社サンエイクローバーのプライバシーポリシー。個人情報保護に関する法令を遵守し、細心の注意を払って情報をお預かりします。">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,13 +17,7 @@
   <link rel="stylesheet" href="/assets/css/site.css?v=5">
 </head>
 <body>
-  <div id="header"></div>
-  <script>
-    fetch("/includes/header.html", { cache: "no-store" }).then(r => r.text()).then(html => {
-      document.getElementById("header").outerHTML = html;
-      const s = document.createElement("script"); s.src = "/assets/js/site.js?v=5"; document.body.appendChild(s);
-    });
-  </script>
+  {% include header.html %}
 
   <main id="main">
     <section class="section" style="padding-top:168px">
@@ -60,12 +55,8 @@
     </section>
   </main>
 
-  <div id="footer"></div>
-  <script>
-    fetch("/includes/footer.html", { cache: "no-store" }).then(r => r.text()).then(html => {
-      document.getElementById("footer").outerHTML = html;
-      document.querySelectorAll("[data-year]").forEach(el => el.textContent = String(new Date().getFullYear()));
-    });
-  </script>
+  {% include footer.html %}
+
+  <script src="/assets/js/site.js?v=5"></script>
 </body>
 </html>
