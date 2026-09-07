@@ -1,4 +1,14 @@
 ---
+# 2026-05-20 の画面リファクタ以前に存在した単独ページの旧URL。
+# jekyll-redirect-from がトップページへの転送ページを生成する(Search Console の 404 対策)
+redirect_from:
+  - /about.html
+  - /about-us.html
+  - /contact.html
+  - /contact-us.html
+  - /recruit.html
+  - /service.html
+  - /terms.html
 ---
 <!DOCTYPE html>
 <html lang="ja">
@@ -8,6 +18,7 @@
   {% include google-analytics.html %}
   <title>株式会社サンエイクローバー — テクノロジーのその先に、「人と、未来と、しあわせ」を。</title>
   <meta name="description" content="Salesforce・生成AI・各種システム連携で、企業のDXを支援する株式会社サンエイクローバー。">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,13 +29,7 @@
   <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
 </head>
 <body>
-  <div id="header"></div>
-  <script>
-    fetch("/includes/header.html", { cache: "no-store" }).then(r => r.text()).then(html => {
-      document.getElementById("header").outerHTML = html;
-      const s = document.createElement("script"); s.src = "/assets/js/site.js?v=5"; document.body.appendChild(s);
-    });
-  </script>
+  {% include header.html %}
 
   <main id="main">
 
@@ -266,12 +271,8 @@
 
   </main>
 
-  <div id="footer"></div>
-  <script>
-    fetch("/includes/footer.html", { cache: "no-store" }).then(r => r.text()).then(html => {
-      document.getElementById("footer").outerHTML = html;
-      document.querySelectorAll("[data-year]").forEach(el => el.textContent = String(new Date().getFullYear()));
-    });
-  </script>
+  {% include footer.html %}
+
+  <script src="/assets/js/site.js?v=5"></script>
 </body>
 </html>

@@ -1,4 +1,15 @@
 # GitHub Pages (Jekyll) build settings
+
+# canonical URL と sitemap.xml の絶対URL生成に使う(末尾スラッシュなし)
+url: https://sanei-clover.com
+
+# GitHub Pages が公式にサポートするプラグインのみ使用可
+# - jekyll-sitemap: /sitemap.xml を自動生成(front matter に sitemap: false で除外)
+# - jekyll-redirect-from: 削除・改名した旧URLから新URLへ転送ページを生成
+plugins:
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
 # 公開サイトに含めないファイル
 exclude:
   - README.md

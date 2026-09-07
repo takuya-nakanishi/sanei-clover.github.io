@@ -1,0 +1,4 @@
+# Jekyll のローカルビルド生成物
+_site/
+.jekyll-cache/
+.jekyll-metadata

@@ -49,8 +49,33 @@ Worker側はname属性の揺れを候補表で吸収するため、上記以外�
 Workerは `ALLOWED_ORIGINS` でこのサイトのオリジンだけを受け付ける。
 ローカル確認は `http://localhost:8080` も許可済み。
 
+## 共通ヘッダ・フッタ
+`_includes/header.html` / `_includes/footer.html` を各ページで `{% include %}` する(Jekyllがビルド時に埋め込む)。
+**以前のクライアント側 `fetch("/includes/…")` 方式は2026-09-07に廃止した。**断片HTMLが単体で200を返す
+公開URLになり、Googleに重複・薄いページとして拾われうるため。`site.js` は `</body>` 直前で読み込む。
+
+# 検索エンジン対応(2026-09-07 Search Console の指摘を受けて導入)
+- **canonical**: 全ページの `<head>` に `<link rel="canonical" href="{{ page.url | absolute_url }}">`。
+  `/` と `/index.html`、`/privacy` と `/privacy.html` のように同じ内容が複数URLで200を返すため、
+  正規URLを明示しないとGoogleが勝手に選ぶ(「重複しています。ユーザーにより正規ページとして選択されていません」の原因)
+- **sitemap.xml / robots.txt**: `jekyll-sitemap` が自動生成。`404.html` は front matter の `sitemap: false` と
+  `<meta name="robots" content="noindex">` で除外(`/404.html` 自体は200で配信されるため)
+- **旧URLの転送**: 削除・改名したページは `jekyll-redirect-from` の `redirect_from` を移行先ページの front matter に
+  書く(GitHub Pagesはサーバ側301が使えないため、meta refresh + canonical の転送ページを生成する)。
+  ページを消すときは必ず移行先へ `redirect_from` を追加すること
+- 使用プラグインは GitHub Pages が公式サポートするものに限る(`_config.yml` の `plugins`)
+
 # ローカル動作確認
 - ポートは 8080 を使う事
+- 本番と同じ条件でビルドするには GitHub Pages 公式イメージを使う(Ruby/Jekyll のローカル導入は不要):
+  ```
+  docker run --rm -v "$PWD":/github/workspace -w /github/workspace -e GITHUB_WORKSPACE=/github/workspace \
+    -e GITHUB_REPOSITORY=sanei-clover/sanei-clover.github.io -e PAGES_REPO_NWO=sanei-clover/sanei-clover.github.io \
+    -e INPUT_SOURCE=. -e INPUT_DESTINATION=./_site -e INPUT_FUTURE=false -e INPUT_BUILD_REVISION= \
+    -e INPUT_VERBOSE=false -e INPUT_TOKEN="$(gh auth token)" -e JEKYLL_ENV=production \
+    ghcr.io/actions/jekyll-build-pages:v1.0.13
+  ```
+  生成物 `_site/` は root 所有になる。`.gitignore` 済みだが、消すときは `sudo` か alpine コンテナ経由で `rm -rf`
 
 # Git 運用ルール
 - 特段の指示がない限り、変更作業は `feature/{適切な名前}` ブランチで実施する
