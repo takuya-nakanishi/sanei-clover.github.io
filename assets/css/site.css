@@ -112,8 +112,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   inset: 0 0 auto 0;
   z-index: 90;
   background: rgba(18, 32, 26, 0.92);
-  backdrop-filter: saturate(140%) blur(10px);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  /* backdrop-filter(blur)は置かない。固定ヘッダの背後をスクロールのたびに毎フレームぼかし直すため
+     スクロール全体がかくつく主因になる。不透明度92〜97%の暗色の下では見た目の差が出ない */
   border-bottom: 1px solid rgba(246, 247, 248, 0.1);
   transition: background var(--t-fast);
 }

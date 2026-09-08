@@ -77,6 +77,10 @@ Workerは `ALLOWED_ORIGINS` でこのサイトのオリジンだけを受け付�
   ```
   生成物 `_site/` は root 所有になる。`.gitignore` 済みだが、消すときは `sudo` か alpine コンテナ経由で `rm -rf`
 
+# セッション運用
+- セッションは本リポジトリのディレクトリで起こす。セッション名は `.env` の `REPO_SLUG`(= `schp`)を使って
+  `schp-{キーワード}` とし、どのリポジトリのセッションか一目で分かるようにする(他リポジトリと同じ規約)
+
 # Git 運用ルール
 - 特段の指示がない限り、変更作業は `feature/{適切な名前}` ブランチで実施する
   - ブランチ名は Claude Code が変更内容から適切な kebab-case で命名する（例: `feature/mod-services-content`, `feature/clean-dead-code`）

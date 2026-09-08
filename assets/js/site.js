@@ -3,14 +3,26 @@
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
   // Header shadow on scroll
+  // scrollイベントは1フレームに何度も飛んでくるので、rAFで1フレーム1回にまとめ、
+  // 状態が変わったときだけclassを触る(毎回 add/remove するとスタイル再計算が走る)
   const header = $(".site-header");
   if (header) {
+    let scrolled = null;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const next = window.scrollY > 24;
+      if (next === scrolled) return;
+      scrolled = next;
+      header.classList.toggle("is-scrolled", next);
+    };
     const onScroll = () => {
-      if (window.scrollY > 24) header.classList.add("is-scrolled");
-      else header.classList.remove("is-scrolled");
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    update();
   }
 
   // Mobile menu
