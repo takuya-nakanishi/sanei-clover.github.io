@@ -17,3 +17,5 @@ exclude:
   - CLAUDE.local.md
   - profiles/*/README.md
   - profiles/**/README.md
+  - .env
+  - .env.example

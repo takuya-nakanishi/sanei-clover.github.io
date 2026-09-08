@@ -2,3 +2,6 @@
 _site/
 .jekyll-cache/
 .jekyll-metadata
+
+# リポジトリ固有の環境変数(REPO_SLUG など)。雛形は .env.example
+.env
