@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Shippori+Mincho+B1:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/site.css?v=6">
+  <link rel="stylesheet" href="/assets/css/site.css?v=7">
 </head>
 <body>
   {% include header.html %}
@@ -28,7 +28,7 @@
           <p class="section__intro reveal" data-stagger="2">個人情報保護に関する当社の方針。法令を遵守し、細心の注意を払って情報をお預かりします。</p>
         </header>
         <div class="privacy reveal">
-          <p class="privacy__meta">Last updated · 2025.09.15</p>
+          <p class="privacy__meta">Last updated · 2026.09.08</p>
           <p>株式会社サンエイクローバー（以下「当社」）は、お客様の個人情報保護の重要性について認識し、個人情報保護に関する法令を遵守するとともに、細心の注意を払ってお客様の個人情報を保護します。</p>
           <h3 data-no="01">個人情報の収集について</h3>
           <p>当社は、お問い合わせフォームのご利用、またはその他当社サービスを通じて、お客様の氏名、メールアドレス等の個人情報を取得することがあります。これらの情報は、ご本人の同意なく、利用目的の範囲を超えて収集することはありません。</p>
@@ -45,10 +45,18 @@
           <p>Google Analyticsのデータ収集、処理の仕組みについては、<a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Googleのウェブサイト</a>をご確認ください。</p>
           <h3 data-no="04">第三者への提供について</h3>
           <p>当社は、法令に基づく場合等正当な理由によらない限り、事前にご本人の同意を得ることなく、個人情報を第三者に開示・提供することはありません。</p>
-          <h3 data-no="05">お問い合わせ窓口</h3>
+          <h3 data-no="05" id="google-user-data">Google ユーザーデータの取り扱い（Agent Workspace）</h3>
+          <p>当社が運用するアプリケーション「<a href="/products/agent-workspace/">Agent Workspace</a>」（https://sanei-clover.com/products/agent-workspace/）は、Google の OAuth 認可を通じて、利用者の Google アカウントのデータにアクセスします。本節では、その取り扱いを定めます。</p>
+          <p><strong>（1）取得するデータ</strong><br>利用者が明示的に許可した範囲で、Google スプレッドシート・Google ドキュメント・Google スライドのうち、利用者が指定したファイルの内容（セル値・数式・本文・スライド内容）およびファイルのメタデータ（タイトル等）を取得します。利用者の Google アカウントのメールアドレス等の基本情報は、認可の識別に必要な範囲でのみ取り扱います。</p>
+          <p><strong>（2）利用目的</strong><br>利用者が AI アシスタントに指示した処理（指定ファイルの読み取り・更新）を実行する目的に限って利用します。広告、販売、利用者が指示していない他の目的、および AI モデルの学習には使用しません。</p>
+          <p><strong>（3）データの保存</strong><br>当社は、取得した Google ユーザーデータを当社のサーバーに保存しません。データは処理の都度、Google の MCP サーバーと利用者が使用する AI アシスタント（Anthropic 社の Claude）との間で送受信されます。Claude 側でのデータの保持については、<a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">Anthropic 社のプライバシーポリシー</a>に従います。</p>
+          <p><strong>（4）第三者への共有</strong><br>利用者の指示を実行するために必要な範囲で、Google ユーザーデータは Anthropic 社の Claude サービスへ送信されます。それ以外の第三者への提供・販売は行いません。ただし、法令に基づく開示要請には応じることがあります。</p>
+          <p><strong>（5）アクセスの取り消しとデータの削除</strong><br>利用者は Google アカウントの「<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">サードパーティ製のアプリとサービス</a>」から、いつでも Agent Workspace のアクセス権を取り消せます。当社は Google ユーザーデータを保存しないため、取り消しにより当社側に残るデータはありません。</p>
+          <p><strong>（6）Google API サービスのユーザーデータに関するポリシーの遵守</strong><br>Agent Workspace による Google API から取得した情報の利用および他のアプリへの転送は、<a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API サービスのユーザーデータに関するポリシー</a>の「限定的な使用（Limited Use）」の要件を含め、同ポリシーに準拠します。</p>
+          <h3 data-no="06">お問い合わせ窓口</h3>
           <p>当社の個人情報に関するお問い合わせは、以下の連絡先までお願いいたします。</p>
           <p><strong>株式会社サンエイクローバー</strong><br>〒170-0013 東京都豊島区東池袋2丁目62番8号 BIGオフィスプラザ池袋1206<br>TEL：03-6876-4989　／　Email：tnakanishi@sanei-clover.com</p>
-          <h3 data-no="06">本ポリシーの変更について</h3>
+          <h3 data-no="07">本ポリシーの変更について</h3>
           <p>本ポリシーの内容は、法令改正等により、必要に応じて変更する場合がございます。変更後のプライバシーポリシーは、本ウェブサイトに掲載した時点より効力を生じるものとします。</p>
         </div>
       </div>
@@ -57,6 +65,6 @@
 
   {% include footer.html %}
 
-  <script src="/assets/js/site.js?v=6"></script>
+  <script src="/assets/js/site.js?v=7"></script>
 </body>
 </html>

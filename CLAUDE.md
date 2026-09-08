@@ -16,6 +16,9 @@
 - 404ページ (404.html)
 - プライバシーポリシー (privacy.html)
 - 私のプロフィール (profiles/takuya-nakanishi/index.html)
+- Agent Workspace 紹介 (agent-workspace.html → `/products/agent-workspace/`)。Google OAuth 同意画面
+  (GCP `citric-earth-449901-e7`)の「アプリケーションのホームページ」に登録するページ。審査要件のため
+  アプリ名「Agent Workspace」の表記・`/privacy.html#google-user-data` への導線・`noindex` 無しを維持すること
 
 ## Web問合せフォーム
 
