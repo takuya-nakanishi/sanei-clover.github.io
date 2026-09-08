@@ -1,0 +1,79 @@
+---
+# Google OAuth 同意画面(GCP プロジェクト citric-earth-449901-e7)の「アプリケーションのホームページ」に
+# 登録する URL。同意画面のアプリ名「Agent Workspace」と一致する名前を <title>・<h1>・本文に表記する。
+permalink: /products/agent-workspace/
+redirect_from:
+  - /agent-workspace/
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% include google-analytics.html %}
+  <title>Agent Workspace | 株式会社サンエイクローバー</title>
+  <meta name="description" content="Agent Workspace は株式会社サンエイクローバーが運用する、AIエージェントから Google スプレッドシート・ドキュメント・スライドを読み書きするための社内ツールです。">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Shippori+Mincho+B1:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css?v=7">
+</head>
+<body>
+  {% include header.html %}
+
+  <main id="main">
+    <section class="section" style="padding-top:168px">
+      <div class="edge">
+        <header class="section__head">
+          <span class="section-no reveal">Product / 01</span>
+          <h1 class="section__title reveal" data-stagger="1">Agent Workspace</h1>
+          <p class="section__intro reveal" data-stagger="2">AIエージェントから Google スプレッドシート・ドキュメント・スライドを安全に読み書きするための、株式会社サンエイクローバーの社内ツールです。</p>
+        </header>
+        <div class="privacy reveal">
+          <h3 data-no="01">Agent Workspace とは</h3>
+          <p>Agent Workspace は、株式会社サンエイクローバー（以下「当社」）が開発・運用するアプリケーションです。Anthropic 社の AI アシスタント「Claude」から、Model Context Protocol（MCP）を通じて Google が提供する公式 MCP サーバー（Google スプレッドシート / Google ドキュメント / Google スライド）に接続し、利用者が指定した Google のファイルを読み取り・編集します。</p>
+          <p>利用者は当社の役職員および当社が業務を委託する担当者に限られ、一般公開・第三者への提供は行っていません。</p>
+
+          <h3 data-no="02">できること</h3>
+          <ul>
+            <li>Google スプレッドシートのセル値の読み取り、値・数式の更新、行や列の挿入</li>
+            <li>Google ドキュメントの本文の読み取りと編集</li>
+            <li>Google スライドのプレゼンテーションの読み取りと編集</li>
+            <li>上記を AI アシスタントとの対話から実行し、財務管理表の更新や議事録・資料作成などの業務を省力化する</li>
+          </ul>
+
+          <h3 data-no="03">Google アカウントのデータへのアクセスについて</h3>
+          <p>Agent Workspace は、利用者が Google アカウントで明示的に許可した場合にのみ、次の権限（OAuth スコープ）を使用します。権限はいずれも「利用者が指定したファイルを、利用者の指示に従って読み書きする」目的に限って使用します。</p>
+          <table class="privacy__table">
+            <thead>
+              <tr><th scope="col">権限</th><th scope="col">利用目的</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Google スプレッドシートの閲覧・編集</td><td>利用者が指定したスプレッドシートの値・数式を読み取り、指示に従って更新するため</td></tr>
+              <tr><td>Google ドキュメントの閲覧・編集</td><td>利用者が指定したドキュメントの本文を読み取り、指示に従って編集するため</td></tr>
+              <tr><td>Google スライドの閲覧・編集</td><td>利用者が指定したプレゼンテーションを読み取り、指示に従って編集するため</td></tr>
+            </tbody>
+          </table>
+          <p>当社は、これらの権限で取得したデータを、利用者の指示した処理以外の目的（広告、販売、他サービスへの転用、AI モデルの学習など）には使用しません。詳細は「<a href="/privacy.html#google-user-data">プライバシーポリシー</a>」の「Google ユーザーデータの取り扱い（Agent Workspace）」をご覧ください。</p>
+
+          <h3 data-no="04">アクセスの取り消し</h3>
+          <p>利用者はいつでも Google アカウントの「<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">サードパーティ製のアプリとサービス</a>」から Agent Workspace のアクセス権を取り消せます。取り消し後、Agent Workspace は利用者の Google データにアクセスできなくなります。</p>
+
+          <h3 data-no="05">運営者・お問い合わせ</h3>
+          <p><strong>株式会社サンエイクローバー</strong><br>〒170-0013 東京都豊島区東池袋2丁目62番8号 BIGオフィスプラザ池袋1206<br>TEL：03-6876-4989　／　Email：tnakanishi@sanei-clover.com</p>
+
+          <h3 data-no="06">Summary (English)</h3>
+          <p lang="en">Agent Workspace is an internal application developed and operated by Sanei Clover Co., Ltd. It connects Anthropic's Claude AI assistant to Google's official MCP servers for Google Sheets, Google Docs and Google Slides, so that authorized staff can read and edit the Google files they specify through natural-language instructions. Agent Workspace requests access to Google Sheets, Google Docs and Google Slides only after the user explicitly grants permission, and uses that access solely to read and edit the files the user designates. We do not sell Google user data, use it for advertising, or use it to train AI models. See our <a href="/privacy.html#google-user-data">Privacy Policy</a> (https://sanei-clover.com/privacy.html#google-user-data) for details. Users can revoke access at any time at <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">https://myaccount.google.com/permissions</a>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {% include footer.html %}
+
+  <script src="/assets/js/site.js?v=7"></script>
+</body>
+</html>
