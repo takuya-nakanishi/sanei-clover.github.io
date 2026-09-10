@@ -14,6 +14,7 @@ plugins:
 exclude:
   - README.md
   - CLAUDE.md
+  - ISSUES.md
   - CLAUDE.local.md
   - profiles/*/README.md
   - profiles/**/README.md
