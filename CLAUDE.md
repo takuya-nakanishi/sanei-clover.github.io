@@ -26,6 +26,8 @@
 「リード」テーブルへ 1 件のレコードとして直に登録する。
 **2026-10-05 に Cloudflare Worker(`sc-products/apps/web-to-notion-cloudflare`。Notion の
 「プロスペクト」DB へ登録し Slack へ通知)から移した。**その前は 2026-08-27 まで Salesforce Web-to-Lead。
+**旧 Worker が送っていた Slack への通知は、この切り替えで止まった。**通知が要るなら Works 側
+(リードの作成時に Slack へ送るワークフロー)で用意する。
 
 ### POST先:
 https://works.sanei-clover.com/api/v1/forms/bqe28tu44p
