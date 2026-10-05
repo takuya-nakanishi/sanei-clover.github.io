@@ -254,6 +254,8 @@ redirect_from:
             <!-- 自動投稿よけ。人には見えない位置に置き、入力があれば送信を無視する -->
             <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
                    style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+            <!-- リードの入り口。Works の「リードソース」の選択肢の値(ラベルではない)。無い値を送ると登録が 400 で失敗する -->
+            <input type="hidden" name="lead_source" value="homepage">
             <div class="field"><label for="cf-company">会社名 / Company</label><input id="cf-company" type="text" name="field_4" placeholder="株式会社サンエイクローバー" required></div>
             <div class="form-row">
               <div class="field"><label for="cf-name">氏名 / Name</label><input id="cf-name" type="text" name="name" placeholder="山田 太郎" required></div>
