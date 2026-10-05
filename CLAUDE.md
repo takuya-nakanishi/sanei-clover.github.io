@@ -46,6 +46,9 @@ URL の末尾は Works の環境設定 → Web フォームの「鍵」。漏れ
 | ご相談内容 / Message | `field_3` | 内容 |
 | (隠し欄) | `_gotcha` | 自動投稿よけ。**人には見せない**。値が入っていると Works は何も登録せず、成功に見せかけた 200 を返す |
 
+「リードソース」(`lead_source`)は Works のフォームの定義の既定値で「ホームページ」(`homepage`)が入る。
+**フォームに欄を足さない**(受け付ける項目に入れていないので、送っても捨てられる。訪問者に書き換えさせないため)。
+
 ### 送信方式
 `fetch()` で `Accept: application/json` を付けて送り、成功なら作ったレコード(`{"record": …}`)、
 失敗なら `{code, message}` が返る。Works は受け口の応答に `Access-Control-Allow-Origin: *` を付けている
