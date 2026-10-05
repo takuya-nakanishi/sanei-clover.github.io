@@ -41,11 +41,11 @@ URL の末尾は Works の環境設定 → Web フォームの「鍵」。漏れ
 
 | 欄 | name 属性 | Works の項目 |
 |---|---|---|
-| 会社名 / Company | `field_4` | 会社名 |
+| 会社名 / Company | `company` | 会社名 |
 | 氏名 / Name | `name` | 名前(**姓名の分割は不要**) |
-| メール / Email | `field_1` | メール |
-| 電話 / Phone | `field_2` | 電話 |
-| ご相談内容 / Message | `field_3` | 内容 |
+| メール / Email | `email` | メール |
+| 電話 / Phone | `phone` | 電話 |
+| ご相談内容 / Message | `description` | 内容 |
 | (隠し欄) | `lead_source` | リードソース。`type="hidden"` で値は `homepage`(選択肢「ホームページ」の**値**。ラベルではない) |
 | (隠し欄) | `_gotcha` | 自動投稿よけ。**人には見せない**。値が入っていると Works は何も登録せず、成功に見せかけた 200 を返す |
 

@@ -256,13 +256,13 @@ redirect_from:
                    style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
             <!-- リードの入り口。Works の「リードソース」の選択肢の値(ラベルではない)。無い値を送ると登録が 400 で失敗する -->
             <input type="hidden" name="lead_source" value="homepage">
-            <div class="field"><label for="cf-company">会社名 / Company</label><input id="cf-company" type="text" name="field_4" placeholder="株式会社サンエイクローバー" required></div>
+            <div class="field"><label for="cf-company">会社名 / Company</label><input id="cf-company" type="text" name="company" placeholder="株式会社サンエイクローバー" required></div>
             <div class="form-row">
               <div class="field"><label for="cf-name">氏名 / Name</label><input id="cf-name" type="text" name="name" placeholder="山田 太郎" required></div>
-              <div class="field"><label for="cf-phone">電話 / Phone</label><input id="cf-phone" type="tel" name="field_2" placeholder="03-0000-0000" required></div>
+              <div class="field"><label for="cf-phone">電話 / Phone</label><input id="cf-phone" type="tel" name="phone" placeholder="03-0000-0000" required></div>
             </div>
-            <div class="field"><label for="cf-email">メール / Email</label><input id="cf-email" type="email" name="field_1" placeholder="you@example.com" required></div>
-            <div class="field"><label for="cf-msg">ご相談内容 / Message</label><textarea id="cf-msg" name="field_3" placeholder="ご相談の概要をお書きください" required></textarea></div>
+            <div class="field"><label for="cf-email">メール / Email</label><input id="cf-email" type="email" name="email" placeholder="you@example.com" required></div>
+            <div class="field"><label for="cf-msg">ご相談内容 / Message</label><textarea id="cf-msg" name="description" placeholder="ご相談の概要をお書きください" required></textarea></div>
             <button type="submit" class="submit"><span class="submit-label">送信する / Send</span></button>
             <p id="contact-status" role="status" style="font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--coral);min-height:1em"></p>
           </form>
