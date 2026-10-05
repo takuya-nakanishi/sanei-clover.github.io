@@ -22,35 +22,40 @@
 
 ## Web問合せフォーム
 
-送信先は自前のCloudflare Worker(`sc-products/apps/web-to-notion-cloudflare`)。
-Workerが受けてNotionの「プロスペクト」DBへ登録し、Slackへ通知する。
-**2026-08-27にSalesforce Web-to-Leadから移行した**(Salesforceを開く習慣がなく
-問い合わせに気づけなかったため。受け皿だったDeveloper Edition組織は180日
-ログインが無いと消える点も理由)。
+送信先は自作 CRM「Works」(`perfect-crm`)の Web フォームの受け口。認証なしで受け、
+「リード」テーブルへ 1 件のレコードとして直に登録する。
+**2026-10-05 に Cloudflare Worker(`sc-products/apps/web-to-notion-cloudflare`。Notion の
+「プロスペクト」DB へ登録し Slack へ通知)から移した。**その前は 2026-08-27 まで Salesforce Web-to-Lead。
 
 ### POST先:
-https://web-to-notion-cloudflare.sanei-clover.workers.dev/
+https://works.sanei-clover.com/api/v1/forms/bqe28tu44p
+
+URL の末尾は Works の環境設定 → Web フォームの「鍵」。漏れて悪用されたら Works で鍵を作り直し、
+ここの `action` を差し替える(古い URL は 404 になる)。
 
 ### フォームパラメータ
-- `company` = 会社名 / Company 欄
-- `name` = 氏名 / Name 欄(**姓名の分割は不要**。Worker側が1欄のまま扱う)
-- `phone` = 電話 / Phone 欄
-- `email` = メール / Email 欄
-- `description` = ご相談内容 / Message 欄
-- `_gotcha` = 自動投稿よけの隠しフィールド。**人には見せない**。値が入っていると
-  Workerが送信を無視する(botに失敗を悟らせないため200を返す)
+**name 属性は Works の「リード」の列名そのもの。**Works は受け付ける列(フォームの定義の「受け付ける項目」)に
+無い名前を黙って捨てるので、名前を変えたら値が消える。列名は Works の MCP の `list_tables` で確かめられる。
 
-Worker側はname属性の揺れを候補表で吸収するため、上記以外の名前でも大抵通る。
-候補に無いフィールドも捨てられず、Notionページの本文へ「その他の入力」として残る。
+| 欄 | name 属性 | Works の項目 |
+|---|---|---|
+| 会社名 / Company | `field_4` | 会社名 |
+| 氏名 / Name | `name` | 名前(**姓名の分割は不要**) |
+| メール / Email | `field_1` | メール |
+| 電話 / Phone | `field_2` | 電話 |
+| ご相談内容 / Message | `field_3` | 内容 |
+| (隠し欄) | `_gotcha` | 自動投稿よけ。**人には見せない**。値が入っていると Works は何も登録せず、成功に見せかけた 200 を返す |
 
 ### 送信方式
-`fetch()` でJSONレスポンス(`{"ok":true}`)を受け取り、成功/失敗を判定する。
+`fetch()` で `Accept: application/json` を付けて送り、成功なら作ったレコード(`{"record": …}`)、
+失敗なら `{code, message}` が返る。Works は受け口の応答に `Access-Control-Allow-Origin: *` を付けている
+(perfect-crm `docs/design/04-api.md` §10 の 7)ので、どのオリジン(ローカル確認の `http://localhost:8080` を含む)からも読める。
 以前の非表示iframe方式は、iframeのloadイベントが「何かが読み込まれた」ことしか
 示さず**送信の成否を区別できなかった**ため廃止した。
 失敗時は電話番号を添えて案内する(黙って飲み込まない)。
+同じ受け口・送り元(IP)から 1 分に 10 件を超えると 429 になる。
 
-Workerは `ALLOWED_ORIGINS` でこのサイトのオリジンだけを受け付ける。
-ローカル確認は `http://localhost:8080` も許可済み。
+**ローカル確認でも本番の Works に登録される。**試し送りで作ったリードは Works の画面から消すこと。
 
 ## 共通ヘッダ・フッタ
 `_includes/header.html` / `_includes/footer.html` を各ページで `{% include %}` する(Jekyllがビルド時に埋め込む)。

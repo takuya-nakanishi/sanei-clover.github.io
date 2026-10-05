@@ -62,8 +62,9 @@
   // Year stamp
   $$("[data-year]").forEach((el) => (el.textContent = String(new Date().getFullYear())));
 
-  // Contact form → Cloudflare Worker 経由で Notion へ登録
+  // Contact form → 自作 CRM「Works」の Web フォームの受け口へ直に送り、「リード」に登録する
   //
+  // 2026-10-05 に Cloudflare Worker(Notion へ登録)から移した。
   // 以前はSalesforce Web-to-Leadへ非表示iframe経由で投げていたが、
   // iframeのloadイベントは「何かが読み込まれた」ことしか示さず、
   // 送信が成功したのか失敗したのかを区別できなかった。
@@ -98,9 +99,10 @@
           headers: { Accept: "application/json" },
           body: new FormData(form),
         });
+        // 成功は作ったレコード、失敗は {code, message}(Works の API の契約)
         const data = await res.json().catch(() => ({}));
-        if (!res.ok || !data.ok) {
-          throw new Error(data.error || `送信に失敗しました (${res.status})`);
+        if (!res.ok || !data.record) {
+          throw new Error(data.message || `送信に失敗しました (${res.status})`);
         }
         setStatus("お問い合わせありがとうございます。担当よりご連絡いたします。");
         form.reset();
