@@ -10,3 +10,8 @@
 
 - [ ] **J-001** 製品紹介欄を作り、自作 CRM「Works」を載せる(2026-10-06)
   - 由来: 本人の依頼(2026-10-06)「この製品を全力で PR してみる」。PR の自動投稿(perfect-crm J-073)と note のリリース記事(perfect-crm J-074)の着地先になる。既存の製品紹介(`agent-workspace.html` → `/products/agent-workspace/`)と形を揃える
+  - [2026-10-07] Works の Android アプリのプライバシーポリシーを `/products/works/privacy.html` に置く(Google Play の掲載情報に登録する URL。perfect-crm 09 A-29。PR #20 = J-002)。製品紹介の頁を `/products/works/` に作るときは、ここへの導線を張る
+- [ ] **J-002** Works の Android アプリのプライバシーポリシー(PR #20)の文面を確かめてマージする(2026-10-08)
+  - 由来: perfect-crm 09 A-29(人が読むページは会社のドメインに置く)。マージすると `https://sanei-clover.com/products/works/privacy.html` が公開され、Google Play の掲載情報に登録できる(perfect-crm J-066)
+  - 確かめること: 法的な表現と連絡先 / 当社が Works のサーバを運用している場合(自社利用)の書き方。「当社がそのサーバを運用している場合を除き」で足りるか
+  - 本人の作業(文面の判断とマージ)。マージしたらこの項目を JOBS-DONE.md へ移す
