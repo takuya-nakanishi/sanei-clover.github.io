@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# クラウドのセッションで ~/.claude の共通の規約とスキル(agent-commons host/global)を揃える。agent-commons J-007。
+# クラウドのセッションで ~/.claude の共通の規約とスキル(agent-commons host/global)を揃える。agent-commons J0007。
 # 手元(Surface・Mac など)は install.sh のリンクが既にあるので何もしない。
-# agent-commons は、このリポジトリと同じディレクトリに置く(リポジトリは並べて clone する。agent-commons J-012)。
+# agent-commons は、このリポジトリと同じディレクトリに置く(リポジトリは並べて clone する。agent-commons J0012)。
 # クラウドでは /home/user/<リポジトリ> の隣になる。セッションに agent-commons が入っていれば、それをそのまま使う
 # (pull しない。セッションの作業ブランチを動かさないため)。
 # 標準出力はセッションの文脈に入るので、成功したときは何も出さない。失敗してもセッションは止めない。
