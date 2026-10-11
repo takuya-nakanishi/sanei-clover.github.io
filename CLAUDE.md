@@ -19,6 +19,10 @@
 - Agent Workspace 紹介 (agent-workspace.html → `/products/agent-workspace/`)。Google OAuth 同意画面
   (GCP `citric-earth-449901-e7`)の「アプリケーションのホームページ」に登録するページ。審査要件のため
   アプリ名「Agent Workspace」の表記・`/privacy.html#google-user-data` への導線・`noindex` 無しを維持すること
+- Works アプリのプライバシーポリシー (products/works/privacy.html)。Google Play の掲載情報の
+  「プライバシーポリシー」に登録するページ。審査要件のため、公開のまま(`noindex` 無し・地域で絞らない)・
+  開発者名「株式会社サンエイクローバー」の表記を維持すること。アプリの振る舞い(集める情報・送り先・権限)が
+  変わったら、perfect-crm の `docs/design/09-android.md` と同時に直す。英語の要約は審査の人のためのもので、`lang="en"` を付ける
 
 ## Web問合せフォーム
 
@@ -103,5 +107,5 @@ Works の「リードソース」に無い値を送ると、登録全体が 400 
 
 # Google Analytics 4
 - 測定ID: G-R362SW6WBR
-- 設置対象: 全ページ (index.html / 404.html / privacy.html / profiles/*)
+- 設置対象: 全ページ (index.html / 404.html / privacy.html / agent-workspace.html / products/* / profiles/*)
 - 設置方法: Jekyll の `_includes/google-analytics.html` に gtag スニペットを定義し、各HTMLの `<head>` 内（できるだけ上部）で `{% include google-analytics.html %}` により読み込む
