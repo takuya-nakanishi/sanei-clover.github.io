@@ -9,5 +9,3 @@
 上から順にやる。ループはこの節の**先頭1件だけ**を取る。
 
 - [ ] **J0001** 製品紹介欄を作り、自作 CRM「Works」を載せる(2026-10-06)
-  - 由来: 本人の依頼(2026-10-06)「この製品を全力で PR してみる」。PR の自動投稿(perfect-crm J0073)と note のリリース記事(perfect-crm J0074)の着地先になる。既存の製品紹介(`agent-workspace.html` → `/products/agent-workspace/`)と形を揃える
-  - [2026-10-07] Works の Android アプリのプライバシーポリシーを `/products/works/privacy.html` に置く(Google Play の掲載情報に登録する URL。perfect-crm 09 A-29。PR #20 = J0002)。製品紹介の頁を `/products/works/` に作るときは、ここへの導線を張る
