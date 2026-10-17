@@ -1,36 +1,16 @@
 #!/usr/bin/env bash
-# クラウドのセッション(Surface が使えないときの予備)の入口。各リポジトリの .claude/hooks/ に同じものを置く。
-# 正本は agent-commons の templates/cloud-hook/agent-commons.sh。全リポジトリで同じかは host/cloud/check-entry.sh で見る。
+# クラウドのセッションで agent-commons が無ければ、どの依頼も処理せずに「agent-commons がない」と返させる。
+# 正本は agent-commons の templates/cloud-hook/agent-commons.sh。各リポジトリの .claude/hooks/ に同じものを置き、
+# .claude/settings.json の SessionStart から呼ぶ。
 #
-# この入口は「隣の agent-commons を用意して、本体(host/cloud/session-hook.sh)へ渡す」だけ。処理を直すときは本体を直し、
-# 入口は変えない(クラウドは開くたびに最新の agent-commons を clone するので、本体の修正はそのまま届く)。
-# agent-commons を用意できなかったときだけ、入口が最低限の警告を出す(本体が無いので)。
-#
-# .claude/settings.json の SessionStart と UserPromptSubmit から呼ぶ(templates/cloud-hook/settings-snippet.json)。
-# 手元(Surface・Mac)は CLAUDE_CODE_REMOTE が無いので何もしない。
+# クラウドでは agent-commons を必ずセッションに選ぶ運用(2026-10-17 本人。選ばないと clone の認証が通らない)。
+# 選ぶと複数リポジトリのセッションになり、リポジトリの hook は読まれない。だからこれが動くのは、
+# agent-commons を選び忘れて1つのリポジトリだけで開いたときになる。手元(Surface・Mac)では何もしない。
+# CLAUDE_CODE_REMOTE(クラウドで Claude Code が入れる)を先に見るのは、手元の worktree(1つ上が .claude/worktrees)や、
+# 隣に agent-commons が無い場所で開いた手元のセッションまで止めないため。
 [ "${CLAUDE_CODE_REMOTE:-}" = true ] || exit 0
+[ -d "$(dirname "${CLAUDE_PROJECT_DIR:-$PWD}")/agent-commons" ] && exit 0
 
-INPUT=$(cat)
-EVENT=$(printf '%s' "$INPUT" | sed -n 's/.*"hook_event_name" *: *"\([A-Za-z]*\)".*/\1/p')
-
-# agent-commons はこのリポジトリの隣に置く。worktree の中では本体の clone の隣を見る(.git の共通ディレクトリの親が本体)
-ROOT=${CLAUDE_PROJECT_DIR:-$PWD}
-COMMON=$(git -C "$ROOT" rev-parse --path-format=absolute --git-common-dir 2>/dev/null) && ROOT=$(dirname "$COMMON")
-DIR=${AGENT_COMMONS:-$(dirname "$ROOT")/agent-commons}
-BODY=$DIR/host/cloud/session-hook.sh
-
-if [ ! -f "$BODY" ]; then
-  [ "$EVENT" = SessionStart ] || exit 0   # 依頼のたびには取りに行かない。開始時に警告済み
-  if [ ! -e "$DIR/.git" ]; then           # worktree なら .git はファイル
-    git clone -q --depth 1 https://github.com/takuya-nakanishi/agent-commons.git "$DIR" >/dev/null 2>&1
-  fi
-  if [ ! -f "$BODY" ]; then
-    MSG='⚠ クラウドのセッションです。agent-commons を取得できなかったので、共通の規約・skill(questions-jobs など)・agent-commons のプラグインはどれも効いていません。'
-    CTX='この環境はクラウド(CLAUDE_CODE_REMOTE=true)で、agent-commons を取得できなかった。全体共通の規約・skill・agent-commons のプラグイン(codex-review・notify・ask-llm・session-digest)は読み込まれていない。それらや、規約で Surface(ローカルPC)でしかできないとされている作業を求められたら、実行も代わりの実装も試みず、Surface が使えるようになってから行うよう先に伝える。'
-    printf '{"systemMessage":"%s","hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"%s"}}\n' "$MSG" "$CTX"
-    exit 0
-  fi
-fi
-
-printf '%s' "$INPUT" | AGENT_COMMONS_DIR=$DIR bash "$BODY"
-exit 0
+MSG='⚠ agent-commons がセッションに無いため、処理できません。このリポジトリと一緒に agent-commons を選んで、セッションを作り直してください。(この確認は、クラウド環境〈環境変数 CLAUDE_CODE_REMOTE=true〉のときだけ行っています)'
+CTX='このクラウドのセッションには agent-commons が無い(クラウドでは agent-commons を必ず一緒に選ぶ運用)。人からのどの依頼にも、作業を始めず、ツールも使わずに「agent-commons がないため処理できません。このリポジトリと一緒に agent-commons を選んで、セッションを作り直してください。(この確認は、クラウド環境〈環境変数 CLAUDE_CODE_REMOTE=true〉のときだけ行っています)」とだけ返す。'
+printf '{"systemMessage":"%s","hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"%s"}}\n' "$MSG" "$CTX"
