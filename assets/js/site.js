@@ -63,11 +63,8 @@
   $$("[data-year]").forEach((el) => (el.textContent = String(new Date().getFullYear())));
 
   // Contact form → 自作 CRM「Works」の Web フォームの受け口へ直に送り、「リード」に登録する
-  //
-  // 2026-10-05 に Cloudflare Worker(Notion へ登録)から移した。
-  // 以前はSalesforce Web-to-Leadへ非表示iframe経由で投げていたが、
-  // iframeのloadイベントは「何かが読み込まれた」ことしか示さず、
-  // 送信が成功したのか失敗したのかを区別できなかった。
+  // 非表示 iframe で送る形は、iframe の load イベントが「何かが読み込まれた」ことしか示さず、
+  // 送信の成否を区別できないので使わない。
   // fetchならレスポンスで実際の可否が分かるため、嘘の完了メッセージを出さずに済む。
   const form = $("#contact-form");
   if (form) {
