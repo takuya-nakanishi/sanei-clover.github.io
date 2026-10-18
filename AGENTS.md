@@ -28,10 +28,7 @@
 
 送信先は自作 CRM「Works」(`perfect-crm`)の Web フォームの受け口。認証なしで受け、
 「リード」テーブルへ 1 件のレコードとして直に登録する。
-**2026-10-05 に Cloudflare Worker(`sc-products/apps/web-to-notion-cloudflare`。Notion の
-「プロスペクト」DB へ登録し Slack へ通知)から移した。**その前は 2026-08-27 まで Salesforce Web-to-Lead。
-**旧 Worker が送っていた Slack への通知は、この切り替えで止まった。**通知が要るなら Works 側
-(リードの作成時に Slack へ送るワークフロー)で用意する。
+通知が要るなら Works 側(リードの作成時に Slack へ送るワークフロー)で用意する。
 
 ### POST先:
 https://works.sanei-clover.com/api/v1/forms/bqe28tu44p
@@ -53,15 +50,15 @@ URL の末尾は Works の環境設定 → Web フォームの「鍵」。漏れ
 | (隠し欄) | `lead_source` | リードソース。`type="hidden"` で値は `homepage`(選択肢「ホームページ」の**値**。ラベルではない) |
 | (隠し欄) | `_gotcha` | 自動投稿よけ。**人には見せない**。値が入っていると Works は何も登録せず、成功に見せかけた 200 を返す |
 
-リードソースはこのフォームが送る(Works の既定値には入れていない。2026-10-05 本人の決定)。
+リードソースはこのフォームが送る(Works の既定値には入れていない)。
 Works の「リードソース」に無い値を送ると、登録全体が 400 で失敗する。値を変えるときは、先に Works に選択肢を足す。
 
 ### 送信方式
 `fetch()` で `Accept: application/json` を付けて送り、成功なら作ったレコード(`{"record": …}`)、
 失敗なら `{code, message}` が返る。Works は受け口の応答に `Access-Control-Allow-Origin: *` を付けている
 (perfect-crm `docs/design/04-api.md` §10 の 7)ので、どのオリジン(ローカル確認の `http://localhost:8080` を含む)からも読める。
-以前の非表示iframe方式は、iframeのloadイベントが「何かが読み込まれた」ことしか
-示さず**送信の成否を区別できなかった**ため廃止した。
+非表示iframe方式は、iframeのloadイベントが「何かが読み込まれた」ことしか
+示さず**送信の成否を区別できない**ため使わない。
 失敗時は電話番号を添えて案内する(黙って飲み込まない)。
 同じ受け口・送り元(IP)から 1 分に 10 件を超えると 429 になる。
 
@@ -69,10 +66,10 @@ Works の「リードソース」に無い値を送ると、登録全体が 400 
 
 ## 共通ヘッダ・フッタ
 `_includes/header.html` / `_includes/footer.html` を各ページで `{% include %}` する(Jekyllがビルド時に埋め込む)。
-**以前のクライアント側 `fetch("/includes/…")` 方式は2026-09-07に廃止した。**断片HTMLが単体で200を返す
+**クライアント側 `fetch("/includes/…")` 方式は使わない。**断片HTMLが単体で200を返す
 公開URLになり、Googleに重複・薄いページとして拾われうるため。`site.js` は `</body>` 直前で読み込む。
 
-# 検索エンジン対応(2026-09-07 Search Console の指摘を受けて導入)
+# 検索エンジン対応
 - **canonical**: 全ページの `<head>` に `<link rel="canonical" href="{{ page.url | absolute_url }}">`。
   `/` と `/index.html`、`/privacy` と `/privacy.html` のように同じ内容が複数URLで200を返すため、
   正規URLを明示しないとGoogleが勝手に選ぶ(「重複しています。ユーザーにより正規ページとして選択されていません」の原因)
