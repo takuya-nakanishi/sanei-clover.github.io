@@ -15,7 +15,7 @@ exclude:
   - README.md
   - CLAUDE.md
   - AGENTS.md
-  - vault/
+  - llm-wiki/
   - CLAUDE.local.md
   - profiles/*/README.md
   - profiles/**/README.md
