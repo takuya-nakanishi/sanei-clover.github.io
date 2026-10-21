@@ -7,4 +7,4 @@
 
 新しいものを上に。消さない(履歴はここに残る)。
 
-- [x] ~~**J0002** Works の Android アプリのプライバシーポリシー(PR #20)の文面を確かめてマージする(2026-10-08)~~ → 完了(2026-10-10): 本人が PR #20 をマージ(`f137521`)。`https://sanei-clover.com/products/works/privacy.html` で公開。Google Play への登録は perfect-crm J0066
+- **J0002** Works の Android アプリのプライバシーポリシー(PR #20)の文面を確かめてマージする(2026-10-08) → 完了(2026-10-10): 本人が PR #20 をマージ(`f137521`)。`https://sanei-clover.com/products/works/privacy.html` で公開。Google Play への登録は perfect-crm J0066
