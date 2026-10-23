@@ -106,3 +106,10 @@ Works の「リードソース」に無い値を送ると、登録全体が 400 
 - 測定ID: G-R362SW6WBR
 - 設置対象: 全ページ (index.html / 404.html / privacy.html / agent-workspace.html / products/* / profiles/*)
 - 設置方法: Jekyll の `_includes/google-analytics.html` に gtag スニペットを定義し、各HTMLの `<head>` 内（できるだけ上部）で `{% include google-analytics.html %}` により読み込む
+
+## 作業の裁量と確認（共通規約への参照）
+
+作業の裁量と確認の要否は、[共通規約](../agent-base/host/global/AGENTS.md)の「作業の裁量と確認」節に従う。
+**既存の必須読み込みの順序を守り、作業開始前に同節を読む。**ユーザー共通規約として既に読んでいれば再読は不要。
+正本は本体の clone と同じ親ディレクトリにある `agent-base/host/global/AGENTS.md`。worktree では `git rev-parse --path-format=absolute --git-common-dir` で本体の clone を確認して参照する。
+本リポジトリ固有の役割・禁止事項・承認条件は引き続き優先する。共通規約の本文はここへ複製しない。
