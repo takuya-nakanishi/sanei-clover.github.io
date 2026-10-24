@@ -250,11 +250,11 @@ redirect_from:
                 action="https://works.sanei-clover.com/api/v1/forms/bqe28tu44p"
                 method="POST">
             <span class="form__tag">Contact Form</span>
-            <!-- name 属性は Works の「リード」の列名(field_N は画面から足した項目の列名。CLAUDE.md の対応表) -->
+            <!-- name 属性は Works の「コンタクト」の列名(field_N は画面から足した項目の列名。CLAUDE.md の対応表) -->
             <!-- 自動投稿よけ。人には見えない位置に置き、入力があれば送信を無視する -->
             <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
                    style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-            <!-- リードの入り口。Works の「リードソース」の選択肢の値(ラベルではない)。無い値を送ると登録が 400 で失敗する -->
+            <!-- 問い合わせの入り口。Works の「きっかけ」の選択肢の値(ラベルではない)。無い値を送ると登録が 400 で失敗する -->
             <input type="hidden" name="lead_source" value="homepage">
             <div class="field"><label for="cf-company">会社名 / Company</label><input id="cf-company" type="text" name="company" placeholder="株式会社サンエイクローバー" required></div>
             <div class="form-row">
