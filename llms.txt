@@ -1,0 +1,17 @@
+# 株式会社サンエイクローバー
+
+> Salesforce・生成AI・各種システム連携で、企業のDXを支援する株式会社サンエイクローバー。
+
+AI、Salesforce、Web系全般。コンサルティングから設計・開発・運用まで、一気通貫でお客様のDXを支援します。
+会社概要・事業内容・代表のプロフィールと、社内ツールの紹介・プライバシーポリシーを掲載しています。
+
+## ページ
+
+- [トップページ](https://sanei-clover.com/): 会社の理念、事業内容、代表メッセージ、お問い合わせ。
+- [事業内容](https://sanei-clover.com/#services): AIコンサルティング・開発、Salesforceコンサルティング・開発、システムインテグレーション事業。
+- [会社概要](https://sanei-clover.com/#company): 会社名、代表取締役、設立日、本社所在地、連絡先。
+- [中西 拓也のプロフィール](https://sanei-clover.com/profiles/takuya-nakanishi/): 代表取締役のプロフィール、専門領域、経歴、SNSへのリンク。
+- [Agent Workspace](https://sanei-clover.com/products/agent-workspace/): AIエージェントから Google スプレッドシート・ドキュメント・スライドを読み書きする社内ツールの紹介。
+- [Works Table アプリのプライバシーポリシー](https://sanei-clover.com/products/works/privacy.html): Android アプリ「Works Table」における利用者の情報の取り扱い。
+- [プライバシーポリシー](https://sanei-clover.com/privacy.html): 個人情報保護の方針と、Agent Workspace における Google ユーザーデータの取り扱い。
+- [note](https://note.com/sanei_clover): Salesforce、生成AI、DX推進の実践記録。

@@ -80,6 +80,10 @@ Works の「きっかけ」に無い値を送ると、登録全体が 400 で失
   書く(GitHub Pagesはサーバ側301が使えないため、meta refresh + canonical の転送ページを生成する)。
   ページを消すときは必ず移行先へ `redirect_from` を追加すること
 - 使用プラグインは GitHub Pages が公式サポートするものに限る(`_config.yml` の `plugins`)
+- **構造化データ**: `index.html` の `<head>` に Organization・WebSite、`profiles/takuya-nakanishi/index.html` の `<head>` に Person の JSON-LD を置く。
+  値は各ページの本文と一致させ、JSON-LD 内に Liquid を書かず、URL は絶対 URL を直書きする。
+- **llms.txt**: ルートの `llms.txt` に会社の要約と主要ページのリンクを置く。front matter を付けず、配信対象から除外しない。
+  会社・代表・事業の事実やページの URL を変えたら、本文と同時に JSON-LD・`llms.txt` の該当箇所も更新する。
 
 # ローカル動作確認
 - ポートは 8080 を使う事
