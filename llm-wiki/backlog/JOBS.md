@@ -9,4 +9,8 @@
 
 上から順にやる。ループはこの節の**先頭1件だけ**を取る。
 
+- **J0003** AIO の土台: Organization/Person/WebSite の JSON-LD と llms.txt を置く(2026-10-31)
 - **J0001** 製品紹介欄を作り、自作 CRM「Works」を載せる(2026-10-06)
+- **J0004** Bing Webmaster Tools にサイトを登録し sitemap を送る(2026-10-31)
+- **J0005** GA4 で AI 検索(chatgpt.com・perplexity.ai・gemini)経由の流入を分けて見る(2026-10-31)
+- **J0006** AI に引用される事実を増やす: FAQ 節(FAQPage JSON-LD)と事業ごとの事例・詳細ページ(2026-10-31)
