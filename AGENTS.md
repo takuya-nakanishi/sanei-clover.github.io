@@ -27,7 +27,7 @@
 ## Web問合せフォーム
 
 送信先は自作 CRM「Works」(`perfect-crm`)の Web フォームの受け口。認証なしで受け、
-「コンタクト」テーブル(人のテーブル。2026-10-23 にリードのテーブルを統合した。perfect-crm `docs/design/01-requirements.md` D-50)へ
+「コンタクト」テーブル(人のテーブル。リードもここに入る。perfect-crm `docs/design/01-requirements.md` D-50)へ
 1 件のレコードとして直に登録する。関係 = 新規・TOBE = リード・メモタグ = Web問合せは、Works のフォームの既定値が入れる。
 通知は Works 側のワークフロー(Web フォームからコンタクトが作られたら Slack へ送る)で用意している。
 
